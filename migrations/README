@@ -1,0 +1,35 @@
+Generic single-database configuration.
+
+This is a task to assess your python and fastapi skills
+
+Tech used here
+ - alembic for migrations
+ - poetry for packages 
+ - sqlalchemy for db queries
+ - fastapi for the server
+ - this folder was created with manage-fastapi
+
+ The Task is in 2 parts
+ - Fix the broken migration
+ - Add user login and provide an example of a protected route (can use fastapi-users for this or any external library so we can test if you can add libraries)
+
+ 
+ App usage:
+
+ - install poetry 
+    `https://python-poetry.org/docs/`
+
+- create a shell  
+    `poetry shell`
+
+- install dependencies
+    `poetry install`
+
+- run the app with 
+    `fastapi run`
+
+Useful links
+ - fastapi-users https://fastapi-users.github.io/fastapi-users/latest/ 
+ - manage fastapi (tool used to create this skeleton) https://github.com/ycd/manage-fastapi 
+ - fastapi official tutorial https://fastapi.tiangolo.com/tutorial/
+ - alembic https://alembic.sqlalchemy.org/en/latest/
