@@ -1,18 +1,36 @@
-version: "3.8"
+networks:
+  avo-network:
 
 services:
   app:
+    container_name: avo-api
     build: .
     env_file:
       - .env
+    volumes:
+      - ./:/app
+    networks:
+      avo-network:
     ports:
       - "8000:8000"
 
-
   database:
+    container_name: avo-db
     image: postgres:12
     env_file:
       - .env
+    networks:
+      avo-network:
     ports:
       - "5439:5432"
+    volumes:
+      - avo-api-db-data:/var/lib/postgresql/data
 
+  redis:
+    container_name: avo-redis
+    image: redis:latest
+    networks:
+      - avo-network
+    
+volumes:
+  avo-api-db-data: ~

@@ -13,6 +13,9 @@ psycopg2-binary = "^2.9.10"
 manage-fastapi = "^1.1.1"
 uvicorn = "^0.34.0"
 python-dotenv = "^1.0.1"
+reportlab = "^4.2.5"
+weasyprint = "^63.1"
+aioredis = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

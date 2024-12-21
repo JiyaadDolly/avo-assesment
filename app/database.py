@@ -1,16 +1,20 @@
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import sessionmaker
-
+from sqlalchemy.ext.declarative import declarative_base
 from app.core.config import settings
+from app.logging import logger
 
-engine = create_engine(settings.DATABASE_URI, pool_pre_ping=True)
+DATABASE_URL = f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}@{settings.POSTGRES_SERVER}/{settings.POSTGRES_DB}"
+
+logger.info(f"Connecting to database at {DATABASE_URL}")
+
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
-
-@as_declarative()
-class Base:
-
-    @declared_attr
-    def __tablename__(cls) -> str:
-        return cls.__name__.lower()
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
