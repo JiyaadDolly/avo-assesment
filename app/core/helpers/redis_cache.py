@@ -2,9 +2,9 @@ import aioredis
 import json
 from typing import Any
 from app.core.config import settings
-from app.logging import logger
+from app.core.helpers.logging import logger
 
-EMPLOYERS_CACHE_KEY = "employers"
+USERS_CACHE_KEY = "employers"
 
 REDIS_URL = f"redis://{settings.REDIS_SERVER}:6379"
 

@@ -16,6 +16,8 @@ python-dotenv = "^1.0.1"
 reportlab = "^4.2.5"
 weasyprint = "^63.1"
 aioredis = "^2.0.1"
+fastapi-users = {extras = ["sqlalchemy"], version = "^14.0.0"}
+asyncpg = "^0.30.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
