@@ -7,8 +7,6 @@ from typing import List, Dict
 import io
 
 def generate_users_pdf(users: list[Dict]):
-    logger.info(f"####DATA: {users}")
-
     html_template = """
         <!DOCTYPE html>
         <html>

@@ -8,7 +8,7 @@ from fastapi_users.authentication import (
     JWTStrategy,
 )
 from fastapi_users.db import SQLAlchemyUserDatabase
-
+from app.core.helpers.cache import cache_invalidate_by_key, CACHE_KEY_USERS_GET_ALL
 from app.db import User, get_user_db
 
 SECRET = "SECRET"
@@ -20,6 +20,7 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
 
     async def on_after_register(self, user: User, request: Optional[Request] = None):
         print(f"User {user.id} has registered.")
+        await cache_invalidate_by_key(CACHE_KEY_USERS_GET_ALL)
 
     async def on_after_forgot_password(
         self, user: User, token: str, request: Optional[Request] = None
@@ -38,9 +39,8 @@ async def get_user_manager(user_db: SQLAlchemyUserDatabase = Depends(get_user_db
 
 bearer_transport = BearerTransport(tokenUrl="v1/auth/jwt/login")
 
-
 def get_jwt_strategy() -> JWTStrategy[models.UP, models.ID]:
-    return JWTStrategy(secret=SECRET, lifetime_seconds=60) # previously 3600 / 1 hour
+    return JWTStrategy(secret=SECRET, lifetime_seconds=3600)
 
 
 auth_backend = AuthenticationBackend(
